@@ -1,6 +1,6 @@
 // Function untuk menentukan nilai minimal dan maksimal pada array
-function generateRandom(nilaiMin, nilaiMax) {
-  return Math.floor(Math.random() * (nilaiMax - nilaiMin + 1)) + nilaiMin;
+function generateRandom() {
+  return Math.floor(Math.random() * 50) + 1;
 }
 
 // Function untuk menemukan nilai minimal pada array
@@ -48,11 +48,26 @@ for (let i = 0; i < 100; i++) {
 // Memisahkan angka ganjil dan genap ke 2 array berbeda
 let evenArray = [];
 let oddArray = [];
+
 for (let i = 0; i < randomArray.length; i++) {
-  if (randomArray[i] % 2 === 0) {
+  if (randomArray[i] % 2 === 0 && evenArray.length < 50) {
     evenArray.push(randomArray[i]);
-  } else {
+  } else if (randomArray[i] % 2 !== 0 && oddArray.length < 50) {
     oddArray.push(randomArray[i]);
+  }
+}
+
+while (evenArray.length < 50) {
+  let randomEven = generateRandom() * 2;
+  if (randomEven <= 50) {
+    evenArray.push(randomEven);
+  }
+}
+
+while (oddArray.length < 50) {
+  let randomOdd = generateRandom() * 2 + 1;
+  if (randomOdd <= 50) {
+    oddArray.push(randomOdd);
   }
 }
 
@@ -66,6 +81,8 @@ let minOdd = findMin(oddArray);
 let maxOdd = findMax(oddArray);
 let totalOdd = findTotal(oddArray);
 let averageOdd = findAverage(oddArray);
+let totalIndexEven = evenArray.length
+let totalIndexOdd = oddArray.length
 
 // Output
 console.log("Array 100 angka dengan nilai random:", randomArray);
@@ -82,6 +99,8 @@ console.log("Max dari array ganjil:", maxOdd);
 console.log("Total dari array ganjil:", totalOdd);
 console.log("Average dari array ganjil:", averageOdd);
 
+console.log("Total even Index:", totalIndexEven)
+console.log("Total odd Index:", totalIndexOdd)
 // Perbandingan
 if (minEven > minOdd) {
   console.log("Min di array genap lebih besar");
